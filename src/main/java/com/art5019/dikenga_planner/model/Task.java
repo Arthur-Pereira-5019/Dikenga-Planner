@@ -1,5 +1,6 @@
 package com.art5019.dikenga_planner.model;
 
+import com.art5019.dikenga_planner.exceptions.task.InvalidTaskName;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -10,10 +11,10 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(length = 511)
     private String name;
 
-    @Column
+    @Column(length = 4095)
     private String desc;
 
     @Column
@@ -73,12 +74,22 @@ public class Task {
         this.finishedDate = finishedDate;
     }
 
-    public void validateName(String name) {
+    public String treatName(String name) {
         if(name == null) {
-
+            throw new InvalidTaskName("Null-named task!");
         }
-        if(name.length() > 255 || name.isBlank()) {
-
+        if(name.isBlank()) {
+            throw new InvalidTaskName("Blank-named task!");
         }
+        if(name.length() > 512) {
+            throw new InvalidTaskName("Long named task!");
+        }
+        return name;
+    }
+    public String treatDescription(String desc) {
+        if(desc.length() > 4095) {
+            throw new InvalidTaskName("Description is way to long!");
+        }
+        return desc;
     }
 }
