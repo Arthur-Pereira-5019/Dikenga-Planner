@@ -15,7 +15,7 @@ public class Phase {
     private Long id;
 
     @Column
-    private ProjectDikengaStructure name;
+    private DikengaPhase actualPhase;
 
     @OneToMany
     private List<Task> tasks;
@@ -35,14 +35,18 @@ public class Phase {
     @Column
     private Boolean finished = false;
 
+    @Column
+    private Integer phaseNumber;
+
 
     public Phase() {
     }
 
-    public Phase(ProjectDikengaStructure name, ZonedDateTime finishingDate, Boolean shouldAutoFinish) {
-        this.name = name;
+    public Phase(DikengaPhase actualPhase, ZonedDateTime finishingDate, Boolean shouldAutoFinish, Integer phaseNumber) {
+        this.actualPhase = actualPhase;
         this.finishingDate = finishingDate;
         this.shouldAutoFinish = shouldAutoFinish;
+        this.phaseNumber = phaseNumber;
     }
 
     public Long getId() {
@@ -50,12 +54,8 @@ public class Phase {
     }
 
 
-    public ProjectDikengaStructure getName() {
-        return name;
-    }
-
-    public void setName(ProjectDikengaStructure name) {
-        this.name = name;
+    public DikengaPhase getActualPhase() {
+        return actualPhase;
     }
 
     public List<Task> getTasks() {
@@ -64,6 +64,14 @@ public class Phase {
 
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public void addTask(Task... tasks) {
+        this.tasks.addAll(List.of(tasks));
+    }
+
+    public void removeTasks(Task... tasks) {
+        this.tasks.removeAll(List.of(tasks));
     }
 
     public ZonedDateTime getFinishingDate() {
