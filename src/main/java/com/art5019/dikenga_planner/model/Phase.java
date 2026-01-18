@@ -1,10 +1,8 @@
 package com.art5019.dikenga_planner.model;
 
-import com.art5019.dikenga_planner.exceptions.task.InvalidDescription;
-import com.art5019.dikenga_planner.exceptions.task.InvalidTaskFinishDate;
+import com.art5019.dikenga_planner.exceptions.InvalidDescription;
 import jakarta.persistence.*;
 
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -42,10 +40,8 @@ public class Phase {
     public Phase() {
     }
 
-    public Phase(DikengaPhase actualPhase, ZonedDateTime finishingDate, Boolean shouldAutoFinish, Integer phaseNumber) {
+    public Phase(DikengaPhase actualPhase, Integer phaseNumber) {
         this.actualPhase = actualPhase;
-        this.finishingDate = finishingDate;
-        this.shouldAutoFinish = shouldAutoFinish;
         this.phaseNumber = phaseNumber;
     }
 
@@ -53,17 +49,12 @@ public class Phase {
         return id;
     }
 
-
     public DikengaPhase getActualPhase() {
         return actualPhase;
     }
 
     public List<Task> getTasks() {
         return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
     }
 
     public void addTask(Task... tasks) {
@@ -79,15 +70,17 @@ public class Phase {
     }
 
     public void setFinishingDate(ZonedDateTime finishingDate) {
+        shouldAutoFinish = true;
         this.finishingDate = finishingDate;
     }
 
-    public Boolean getShouldAutoFinish() {
-        return shouldAutoFinish;
+    public void removeFinishingDate() {
+        finishingDate = null;
+        shouldAutoFinish = false;
     }
 
-    public void setShouldAutoFinish(Boolean shouldAutoFinish) {
-        this.shouldAutoFinish = shouldAutoFinish;
+    public Boolean shouldAutoFinish() {
+        return shouldAutoFinish;
     }
 
     public String getAnnotations() {

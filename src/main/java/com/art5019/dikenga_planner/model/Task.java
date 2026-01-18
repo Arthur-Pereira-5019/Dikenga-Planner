@@ -1,9 +1,9 @@
 package com.art5019.dikenga_planner.model;
 
-import com.art5019.dikenga_planner.exceptions.task.InvalidDescription;
-import com.art5019.dikenga_planner.exceptions.task.InvalidTaskFinishDate;
-import com.art5019.dikenga_planner.exceptions.task.InvalidName;
-import com.art5019.dikenga_planner.exceptions.task.InvalidTaskPriority;
+import com.art5019.dikenga_planner.exceptions.InvalidDescription;
+import com.art5019.dikenga_planner.exceptions.InvalidTaskFinishDate;
+import com.art5019.dikenga_planner.exceptions.InvalidName;
+import com.art5019.dikenga_planner.exceptions.InvalidTaskPriority;
 import jakarta.persistence.*;
 
 import java.time.Instant;

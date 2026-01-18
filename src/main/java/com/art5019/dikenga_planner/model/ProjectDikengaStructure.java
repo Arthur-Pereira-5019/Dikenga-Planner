@@ -18,4 +18,15 @@ public enum ProjectDikengaStructure {
         this.dp = dp;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public int getPhases() {
+        return phases;
+    }
+
+    public List<DikengaPhase> getDp() {
+        return dp;
+    }
 }
