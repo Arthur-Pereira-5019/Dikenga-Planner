@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: Dikenga Planner
+  datasource:
+    url: jdbc:mysql://localhost:3306/dikenga?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: Art.DB25
+    name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        format_sql: false
+  jackson:
+    time-zone: "America/Sao_Paulo"
+    mvc:
+      time-zone: "America/Sao_Paulo"
+logger:
+  root: DEBUG
+  com.kings.okdhvi: DEBUG
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: WARN
+        type:
+          descriptor:
+            sql:
+              BasicBinder: WARN
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:KINGS}
