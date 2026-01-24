@@ -16,7 +16,7 @@ public class Project {
     private ProjectDikengaStructure dikengaStructure;
 
     @OneToMany
-    private List<Phase> phases;
+    private List<Phase> phases = new ArrayList<>();
 
     @Column
     private boolean started;
@@ -24,7 +24,7 @@ public class Project {
     @Column
     private String projectName;
 
-    @Column(length = 16383)
+    @Column(length = 16383,columnDefinition = "TEXT")
     private String projectDescription;
 
     @Column

@@ -1,8 +1,8 @@
 package com.art5019.dikenga_planner.model;
 
 import com.art5019.dikenga_planner.exceptions.InvalidDescription;
-import com.art5019.dikenga_planner.exceptions.InvalidTaskFinishDate;
 import com.art5019.dikenga_planner.exceptions.InvalidName;
+import com.art5019.dikenga_planner.exceptions.InvalidTaskFinishDate;
 import com.art5019.dikenga_planner.exceptions.InvalidTaskPriority;
 import jakarta.persistence.*;
 
@@ -18,8 +18,8 @@ public class Task {
     @Column(length = 511)
     private String name;
 
-    @Column(length = 4095)
-    private String desc;
+    @Column(length = 4095,columnDefinition = "TEXT")
+    private String description;
 
     @Column
     private Boolean finished = false;
@@ -34,7 +34,7 @@ public class Task {
     private int priority;
 
 
-    public Task(String name, String desc, ZonedDateTime creationDate, int priority) {
+    public Task(String name, String description, ZonedDateTime creationDate, int priority) {
         if(name == null) {
             throw new InvalidName("Null-named task!");
         }
@@ -44,7 +44,7 @@ public class Task {
         if(name.length() > 511) {
             throw new InvalidName("Long named task!");
         }
-        if(desc.length() > 4095) {
+        if(description.length() > 4095) {
             throw new InvalidDescription("Description is way to long!");
         }
         if(priority > 10) {
@@ -54,7 +54,7 @@ public class Task {
             throw new InvalidTaskPriority("Negative priority!");
         }
         this.name = name;
-        this.desc = desc;
+        this.description = description;
         this.creationDate = creationDate;
         this.priority = priority;
     }
@@ -88,15 +88,15 @@ public class Task {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        if(desc.length() > 4095) {
+    public void setDescription(String description) {
+        if(description.length() > 4095) {
             throw new InvalidDescription("Description is way to long!");
         }
-        this.desc = desc;
+        this.description = description;
     }
 
     public Boolean getFinished() {

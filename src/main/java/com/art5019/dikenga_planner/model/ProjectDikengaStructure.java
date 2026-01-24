@@ -1,6 +1,5 @@
 package com.art5019.dikenga_planner.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public enum ProjectDikengaStructure {

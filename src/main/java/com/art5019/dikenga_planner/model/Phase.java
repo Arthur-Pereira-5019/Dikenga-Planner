@@ -27,7 +27,7 @@ public class Phase {
     @Column
     private Boolean shouldAutoFinish;
 
-    @Column(length = 8191)
+    @Column(length = 8191,columnDefinition = "TEXT")
     private String annotations;
 
     @Column
