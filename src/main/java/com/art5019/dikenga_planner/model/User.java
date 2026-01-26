@@ -28,6 +28,9 @@ public class User implements UserDetails {
     @OneToMany
     private List<Project> projects;
 
+    public User() {
+    }
+
     public User(String name, String email, String password) {
         if(name == null || name.isBlank()) {
             throw new InvalidName("Empty username!");
@@ -49,13 +52,13 @@ public class User implements UserDetails {
         if(password == null || password.isBlank()) {
             throw new InvalidPasswordException("Empty password!");
         }
-        if(email.length() > 255) {
+        if(password.length() > 255) {
             throw new InvalidPasswordException("Way too long password!");
         }
         if(password.length() < 8) {
             throw new InvalidPasswordException("Way too small password!");
         }
-        if(!email.matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%.^&*-]).{8,}$")) {
+        if(!password.matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%.^&*-]).{8,}$")) {
             throw new InvalidPasswordException("Invalid password format!");
         }
 
@@ -139,13 +142,13 @@ public class User implements UserDetails {
         if(password == null || password.isBlank()) {
             throw new InvalidPasswordException("Empty password!");
         }
-        if(email.length() > 255) {
+        if(password.length() > 255) {
             throw new InvalidPasswordException("Way too long password!");
         }
         if(password.length() < 8) {
             throw new InvalidPasswordException("Way too small password!");
         }
-        if(!email.matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%.^&*-]).{8,}$")) {
+        if(!password.matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%.^&*-]).{8,}$")) {
             throw new InvalidPasswordException("Invalid password format!");
         }
         this.password = password;
