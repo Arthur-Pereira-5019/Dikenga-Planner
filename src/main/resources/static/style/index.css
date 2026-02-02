@@ -1,0 +1,14 @@
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh
+}
+
+#newProject {
+    background-image: url("/assets/plus.png");
+    aspect-ratio: 1/1;
+}
+
+.card {
+    width: 40%;
+}

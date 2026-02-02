@@ -49,10 +49,10 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserRegisterDTO u, HttpServletResponse response) {
-        String senhaPrevia = u.password();
+        String oldPassword = u.password();
         us.registerUser(u);
 
-        var usernamePassword = new UsernamePasswordAuthenticationToken(u.email(), senhaPrevia);
+        var usernamePassword = new UsernamePasswordAuthenticationToken(u.email(), oldPassword);
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = ts.generateToken((User) auth.getPrincipal());

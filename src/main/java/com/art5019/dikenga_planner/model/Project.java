@@ -30,6 +30,9 @@ public class Project {
     @Column
     private int currentPhaseNumber;
 
+    public Project() {
+    }
+
     public Long getId() {
         return id;
     }
