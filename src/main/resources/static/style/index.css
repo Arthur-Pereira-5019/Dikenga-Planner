@@ -7,8 +7,9 @@
 #newProject {
     background-image: url("/assets/plus.png");
     aspect-ratio: 1/1;
+    background-size: cover;
 }
 
-.card {
-    width: 40%;
+body {
+    gap: 1vh
 }
