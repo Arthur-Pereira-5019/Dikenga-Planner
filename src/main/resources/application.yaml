@@ -22,7 +22,6 @@ spring:
       time-zone: "America/Sao_Paulo"
 logger:
   root: DEBUG
-  com.kings.okdhvi: DEBUG
 logging:
   level:
     org:
@@ -35,4 +34,4 @@ logging:
 api:
   security:
     token:
-      secret: ${JWT_SECRET:KINGS}
+      secret: ${JWT_SECRET:DIKENGA}

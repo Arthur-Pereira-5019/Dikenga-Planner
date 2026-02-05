@@ -54,8 +54,10 @@ public class UserController {
 
         var usernamePassword = new UsernamePasswordAuthenticationToken(u.email(), oldPassword);
         var auth = this.authenticationManager.authenticate(usernamePassword);
-
+        System.out.println("3");
         var token = ts.generateToken((User) auth.getPrincipal());
+        System.out.println("4");
+
 
         Cookie cookie = new Cookie("jwt", token);
         cookie.setHttpOnly(true);

@@ -31,19 +31,6 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
 
-    /*@Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        var token = this.recoverToken(request);
-        if(token != null) {
-            var login = tokenService.validateToken(token);
-            UserDetails user = us.encontrarPorEmail(login,false);
-
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
-        filterChain.doFilter(request, response);
-    }*/
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
@@ -67,7 +54,7 @@ public class SecurityFilter extends OncePerRequestFilter {
                     }
                     """.formatted(
                     new Date(),
-                    "Login inválido, atualize a página para autenticar-se novamente.",
+                    "Invalid token, update to login again.",
                     request.getRequestURI()
             );
 

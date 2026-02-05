@@ -7,8 +7,8 @@ const iEmail = document.querySelector("#iEmail");
 const form = document.querySelector("form");
 const submit = document.querySelector("#submit");
 
-irPassword.addEventListener("focusout",function() {
-    if(iPassword.value != irPassword.value) {
+irPassword.addEventListener("focusout", function () {
+    if (iPassword.value != irPassword.value) {
         iPassword.data
     }
 })
@@ -22,9 +22,9 @@ submit.addEventListener("click", function () {
 
     fetch('http://localhost:8080/api/user/register', {
         method: 'POST',
-              headers: {
-        'Content-Type': 'application/json'
-      },
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(body)
     })
         .then(
