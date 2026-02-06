@@ -35,8 +35,6 @@ public class User implements UserDetails {
     public User(String name, String email, String password) {
         validateName(name);
         validateMail(email);
-        validatePassword(password);
-        password = (new BCryptPasswordEncoder().encode(password));
         this.name = name;
         this.email = email;
         this.password = password;
@@ -93,21 +91,6 @@ public class User implements UserDetails {
         }
     }
 
-    private void validatePassword(String password) {
-        if(password == null || password.isBlank()) {
-            throw new InvalidPasswordException("Empty password!");
-        }
-        if(password.length() > 255) {
-            throw new InvalidPasswordException("Way too long password!");
-        }
-        if(password.length() < 8) {
-            throw new InvalidPasswordException("Way too small password!");
-        }
-        if(!password.matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%.^&*-]).{8,}$")) {
-            throw new InvalidPasswordException("Invalid password format!");
-        }
-    }
-
     public Long getId() {
         return id;
     }
@@ -136,7 +119,6 @@ public class User implements UserDetails {
     }
 
     public void setPassword(String password) {
-        validatePassword(password);
         this.password = password;
     }
 

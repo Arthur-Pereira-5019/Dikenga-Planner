@@ -19,6 +19,7 @@ submit.addEventListener("click", function () {
         email: iEmail.value,
         password: iPassword.value,
     };
+    console.log(body)
 
     fetch('http://localhost:8080/api/user/register', {
         method: 'POST',
