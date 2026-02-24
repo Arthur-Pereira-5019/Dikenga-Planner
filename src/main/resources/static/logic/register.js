@@ -32,6 +32,7 @@ submit.addEventListener("click", function () {
             response => {
                 if (response.ok) {
                     alert("Registered with success!")
+                    window.location.pathname = ""
                 } else {
                     return response.json()
                 }

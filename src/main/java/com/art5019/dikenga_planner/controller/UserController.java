@@ -1,6 +1,7 @@
 package com.art5019.dikenga_planner.controller;
 
 import com.art5019.dikenga_planner.dto.LoginRequestDTO;
+import com.art5019.dikenga_planner.dto.UserPresentationDTO;
 import com.art5019.dikenga_planner.dto.UserRegisterDTO;
 import com.art5019.dikenga_planner.model.User;
 import com.art5019.dikenga_planner.repository.UserRepository;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.header.writers.PermissionsPolicyHeaderWriter;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +39,7 @@ public class UserController {
 
         var token = ts.generateToken((User) auth.getPrincipal());
 
-        Cookie cookie = new Cookie("jwt", token);
+        Cookie cookie = new Cookie("login", token);
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
         cookie.setPath("/");
@@ -67,5 +70,10 @@ public class UserController {
         response.addCookie(cookie);
 
         return ResponseEntity.ok("Registered with success!");
+    }
+
+    @GetMapping("/present")
+    public UserPresentationDTO userPresentationDTO(@AuthenticationPrincipal UserDetails ud) {
+        return us.presentUser(ud.getUsername());
     }
 }

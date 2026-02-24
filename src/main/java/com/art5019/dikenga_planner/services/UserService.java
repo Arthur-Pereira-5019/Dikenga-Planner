@@ -1,5 +1,6 @@
 package com.art5019.dikenga_planner.services;
 
+import com.art5019.dikenga_planner.dto.UserPresentationDTO;
 import com.art5019.dikenga_planner.dto.UserRegisterDTO;
 import com.art5019.dikenga_planner.exceptions.DuplicatedUserException;
 import com.art5019.dikenga_planner.exceptions.UserNotFoundException;
@@ -35,5 +36,10 @@ public class UserService implements UserDetailsService {
             throw new DuplicatedUserException("User already exists!");
         }
         return ur.save(u);
+    }
+
+    public UserPresentationDTO presentUser(String username) {
+        User u = (User) loadUserByUsername(username);
+        return new UserPresentationDTO(u.getName());
     }
 }
