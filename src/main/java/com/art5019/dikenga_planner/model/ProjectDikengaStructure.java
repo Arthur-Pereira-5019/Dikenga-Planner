@@ -28,4 +28,14 @@ public enum ProjectDikengaStructure {
     public List<DikengaPhase> getDp() {
         return dp;
     }
+
+    public static ProjectDikengaStructure fromId(int id) {
+        ProjectDikengaStructure[] structures = ProjectDikengaStructure.values();
+        for (ProjectDikengaStructure structure : structures) {
+            if (structure.id == id) {
+                return structure;
+            }
+        }
+        return ProjectDikengaStructure.NONE;
+    }
 }
