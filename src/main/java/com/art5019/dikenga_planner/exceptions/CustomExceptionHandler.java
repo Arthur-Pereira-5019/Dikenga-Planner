@@ -1,5 +1,6 @@
 package com.art5019.dikenga_planner.exceptions;
 
+import com.art5019.dikenga_planner.exceptions.project.ProjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -78,6 +79,12 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
     public final ResponseEntity<ExceptionResponse> handleUserNotFound(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ProjectNotFoundException.class)
+    public final ResponseEntity<ExceptionResponse> handleProjectNotFound(Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }

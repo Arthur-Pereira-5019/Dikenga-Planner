@@ -49,7 +49,7 @@ public class Project {
         if(name == null || name.isBlank()) {
             throw new InvalidName("Empty project name!");
         }
-        if(name.length() > 255) {
+        if(name.length() > 16383) {
             throw new InvalidName("Name way too long");
         }
         this.projectName = name;
@@ -81,7 +81,7 @@ public class Project {
         return started;
     }
 
-    public void nextCycle() {
+    public void goToNextCycle() {
         int pn = phases.size()-1;
         List<DikengaPhase> mp = dikengaStructure.getDp();
         List<Phase> np = new ArrayList<>();
