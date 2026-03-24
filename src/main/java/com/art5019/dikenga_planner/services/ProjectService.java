@@ -10,6 +10,8 @@ import com.art5019.dikenga_planner.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectService {
     @Autowired
@@ -46,5 +48,14 @@ public class ProjectService {
         Project p = findProjectById(pundto.id());
         p.setProjectDescription(pundto.name());
         pr.save(p);
+    }
+
+    public void deleteProject(Long id) {
+        Project p = findProjectById(id);
+        pr.delete(p);
+    }
+
+    public List<Project> findAllProjects() {
+        return pr.findAll();
     }
 }
