@@ -5,8 +5,12 @@ import com.art5019.dikenga_planner.dto.project.ProjectUpdateDescriptionDTO;
 import com.art5019.dikenga_planner.dto.project.ProjectUpdateNameDTO;
 import com.art5019.dikenga_planner.model.Project;
 import com.art5019.dikenga_planner.services.ProjectService;
+import com.art5019.dikenga_planner.services.UserService;
+import org.hibernate.mapping.UserDefinedArrayType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
@@ -19,9 +23,16 @@ public class ProjectController {
     @Autowired
     ProjectService ps;
 
+    @Autowired
+    UserService us;
+
     @PostMapping("/create")
-    public ResponseEntity<?> createProject(@RequestBody ProjectCreationDTO p) {
-        ps.createProject(p).getId();
+    public ResponseEntity<?> createProject(@RequestBody ProjectCreationDTO p, @AuthenticationPrincipal UserDetails ud) {
+        try {
+            ps.createProject(p, us.findByUserDetails(ud));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ResponseEntity.ok().build();
     }
 
@@ -31,8 +42,8 @@ public class ProjectController {
     }
 
     @GetMapping()
-    public List<Project> findAll() {
-        return ps.findAllProjects();
+    public List<Project> findAll(@AuthenticationPrincipal UserDetails ud) {
+        return us.findAllProjects(us.findByUserDetails(ud));
     }
 
 

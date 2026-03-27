@@ -4,6 +4,7 @@ import com.art5019.dikenga_planner.exceptions.InvalidDescription;
 import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,8 +16,8 @@ public class Phase {
     @Column
     private DikengaPhase actualPhase;
 
-    @OneToMany
-    private List<Task> tasks;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Task> tasks = new ArrayList<>();
 
     @Column
     private ZonedDateTime finishingDate;

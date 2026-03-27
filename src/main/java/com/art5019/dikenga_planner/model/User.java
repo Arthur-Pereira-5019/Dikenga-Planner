@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-    @OneToMany
-    private List<Project> projects;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Project> projects = new ArrayList<>();
 
     public User() {
     }

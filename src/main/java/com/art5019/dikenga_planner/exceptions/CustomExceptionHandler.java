@@ -17,6 +17,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex, WebRequest request) {
+        ex.printStackTrace();
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .contentType(MediaType.APPLICATION_JSON)

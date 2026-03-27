@@ -74,6 +74,6 @@ public class UserController {
 
     @GetMapping("/present")
     public UserPresentationDTO userPresentationDTO(@AuthenticationPrincipal UserDetails ud) {
-        return us.presentUser(ud.getUsername());
+        return us.presentUser(us.findByUserDetails(ud));
     }
 }

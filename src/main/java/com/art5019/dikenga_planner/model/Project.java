@@ -2,6 +2,7 @@ package com.art5019.dikenga_planner.model;
 
 import com.art5019.dikenga_planner.exceptions.InvalidName;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Project {
     @Column
     private ProjectDikengaStructure dikengaStructure;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Phase> phases = new ArrayList<>();
 
     @Column
@@ -93,7 +94,11 @@ public class Project {
     }
 
     public Phase getCurrentPhase() {
-        return phases.get(currentPhaseNumber);
+        if(!phases.isEmpty()) {
+            return phases.get(currentPhaseNumber);
+        } else {
+            return null;
+        }
     }
 
     public Project(ProjectDikengaStructure dikengaStructure, String projectName) {
@@ -106,6 +111,7 @@ public class Project {
         this.dikengaStructure = dikengaStructure;
         this.projectName = projectName;
     }
+
 
 
 }

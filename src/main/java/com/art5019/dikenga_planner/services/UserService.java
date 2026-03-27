@@ -5,6 +5,7 @@ import com.art5019.dikenga_planner.dto.UserRegisterDTO;
 import com.art5019.dikenga_planner.exceptions.DuplicatedUserException;
 import com.art5019.dikenga_planner.exceptions.UserNotFoundException;
 import com.art5019.dikenga_planner.model.PasswordService;
+import com.art5019.dikenga_planner.model.Project;
 import com.art5019.dikenga_planner.model.User;
 import com.art5019.dikenga_planner.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -38,8 +41,25 @@ public class UserService implements UserDetailsService {
         return ur.save(u);
     }
 
-    public UserPresentationDTO presentUser(String username) {
-        User u = (User) loadUserByUsername(username);
+    public User updateUser(User u) {
+        ps.validatePassword(u.getPassword());
+        return ur.save(u);
+    }
+
+    public UserPresentationDTO presentUser(User u) {
         return new UserPresentationDTO(u.getName());
     }
+
+    public User findById(Long id) {
+        return ur.findById(id).orElseThrow(() -> new UserNotFoundException("Not found any user with the provided Id"));
+    }
+
+    public List<Project> findAllProjects(User u) {
+        return u.getProjects();
+    }
+
+    public User findByUserDetails(UserDetails ud) {
+        return (User) loadUserByUsername(ud.getUsername());
+    }
+
 }
