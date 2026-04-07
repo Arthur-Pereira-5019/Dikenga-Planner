@@ -95,11 +95,11 @@ async function fetchProjects() {
             firstCard.remove()
             return;
         }
-        data.foreach((x, i) => {
+        data.forEach((x, i) => {
             if (i == 0) {
                 buildCard(firstCard, x)
             } else {
-                newCard = firstCard.cloneNode()
+                newCard = firstCard.cloneNode(true)
                 buildCard(newCard, x)
                 if (i % 2 == 1) {
                     colright.appendChild(newCard)
@@ -109,6 +109,7 @@ async function fetchProjects() {
             }
         })
     }).catch(error => {
+        console.log(error)
         firstCard.remove()
     })
 
