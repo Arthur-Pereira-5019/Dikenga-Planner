@@ -101,6 +101,10 @@ public class Project {
         }
     }
 
+    public int getCurrentPhaseNumber() {
+        return currentPhaseNumber;
+    }
+
     public Project(ProjectDikengaStructure dikengaStructure, String projectName) {
         if(projectName == null || projectName.isBlank()) {
             throw new InvalidName("Empty project name!");

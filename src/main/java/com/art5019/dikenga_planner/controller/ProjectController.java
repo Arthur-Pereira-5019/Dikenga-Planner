@@ -1,8 +1,10 @@
 package com.art5019.dikenga_planner.controller;
 
 import com.art5019.dikenga_planner.dto.project.ProjectCreationDTO;
+import com.art5019.dikenga_planner.dto.project.ProjectSimpleDisplayDTO;
 import com.art5019.dikenga_planner.dto.project.ProjectUpdateDescriptionDTO;
 import com.art5019.dikenga_planner.dto.project.ProjectUpdateNameDTO;
+import com.art5019.dikenga_planner.mapper.ProjectMapper;
 import com.art5019.dikenga_planner.model.Project;
 import com.art5019.dikenga_planner.services.ProjectService;
 import com.art5019.dikenga_planner.services.UserService;
@@ -26,6 +28,9 @@ public class ProjectController {
     @Autowired
     UserService us;
 
+    @Autowired
+    ProjectMapper pm;
+
     @PostMapping("/create")
     public ResponseEntity<?> createProject(@RequestBody ProjectCreationDTO p, @AuthenticationPrincipal UserDetails ud) {
         try {
@@ -42,8 +47,9 @@ public class ProjectController {
     }
 
     @GetMapping()
-    public List<Project> findAll(@AuthenticationPrincipal UserDetails ud) {
-        return us.findAllProjects(us.findByUserDetails(ud));
+    public List<ProjectSimpleDisplayDTO> findAll(@AuthenticationPrincipal UserDetails ud) {
+        List<Project> list = us.findAllProjects(us.findByUserDetails(ud));
+        return pm.simpleDisplayList(list);
     }
 
 
