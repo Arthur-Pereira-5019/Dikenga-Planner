@@ -118,4 +118,6 @@ async function fetchProjects() {
 async function buildCard(element, data) {
     element.querySelector(".card-title").textContent = data.projectName
     element.querySelector(".card-text").textContent = data.projectDescription
+    strctid = data.dikengaStructure.id
+    element.querySelector(".card-img-top").src = "/assets/"+strctid+"_"+data.currentPhaseNumber%data.dikengaStructure.phases+".png"
 }

@@ -59,7 +59,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             );
 
             response.getWriter().write(body);
-            Cookie cookie = new Cookie("jwt", null);
+            Cookie cookie = new Cookie("login", null);
             cookie.setPath("/");
             cookie.setMaxAge(0);
             response.addCookie(cookie);
@@ -70,7 +70,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         String token = null;
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
-                if ("jwt".equals(cookie.getName())) {
+                if ("login".equals(cookie.getName())) {
                     token = cookie.getValue();
                 }
             }
