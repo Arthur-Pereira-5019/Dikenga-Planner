@@ -119,5 +119,20 @@ async function buildCard(element, data) {
     element.querySelector(".card-title").textContent = data.projectName
     element.querySelector(".card-text").textContent = data.projectDescription
     strctid = data.dikengaStructure.id
-    element.querySelector(".card-img-top").src = "/assets/"+strctid+"_"+data.currentPhaseNumber%data.dikengaStructure.phases+".png"
+    
+    if(data.started) {
+        element.querySelector(".card-img-top").src = "/assets/"+strctid+"_"+data.currentPhaseNumber%data.dikengaStructure.phases+".png"
+    } else {
+        pb = element.querySelector(".project-button")
+        element.querySelector(".card-img-top").src = "assets/"+strctid+".png"
+        if(!pb.hasChildNodes()) {
+            b = document.createElement('img')
+        b.src = "assets/start_button.png"
+        pb.appendChild(b)
+        pb.classList.add('start_button')
+        pb.title = "Start your project"
+        }
+        
+
+    }
 }

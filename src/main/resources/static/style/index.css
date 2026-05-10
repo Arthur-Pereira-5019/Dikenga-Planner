@@ -13,3 +13,12 @@
 body {
     gap: 1vh
 }
+
+.start_button {
+    background-color: white;
+    border-radius: 100%;
+}
+
+.start_button img {
+    width: 40px;
+}
